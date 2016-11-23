@@ -20,6 +20,7 @@ public class VolleyManager {
     private static final int BYTES_PER_PIXEL = 4;
     private static final int SCREENS_TO_CACHE = 3;
     private static VolleyManager sharedInstance;
+    int i = 0;
 
     /**
      * Generate Singleton
