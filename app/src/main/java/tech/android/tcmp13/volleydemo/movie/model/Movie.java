@@ -5,16 +5,20 @@ package tech.android.tcmp13.volleydemo.movie.model;
  */
 public class Movie {
 
+    private String id;
     private String title;
     private int year;
     private String posterUrl;
 
-    public Movie(String title, int year, String posterUrl) {
+    public Movie(String id, String title, int year, String posterUrl) {
 
+        this.id = id;
         this.title = title;
         this.year = year;
         this.posterUrl = posterUrl;
     }
+
+    public String getId() { return  id;}
 
     public String getTitle() {
         return title;

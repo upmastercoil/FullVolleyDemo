@@ -11,6 +11,7 @@ public interface OmdbApiConstants {
     String SEARCH_BY_TITLE = "s=";
     String SEARCH_BY_IMDB_ID = "i=";
 
+    String MOVIE_ID_KEY = "imdbID";
     String MOVIE_TITLE_KEY = "Title";
     String MOVIE_YEAR_KEY = "Year";
     String MOVIE_POSTER_URL_KEY = "Poster";

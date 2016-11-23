@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //Set the click listener
-//        SelectMovieClickListener selectMovieClickListener = new SelectMovieClickListener(adapter);
-//        adapter.setMovieClickListener(selectMovieClickListener);
+        SelectMovieClickListener selectMovieClickListener = new SelectMovieClickListener(this, adapter);
+        adapter.setMovieClickListener(selectMovieClickListener);
     }
 
     private void setupSearchBar() {
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 JSONObject movieJson = moviesArray.getJSONObject(i);
                                 //Try find values for keys
+                                String id = movieJson.optString(OmdbApiConstants.MOVIE_ID_KEY);
                                 String title = movieJson.optString(OmdbApiConstants.MOVIE_TITLE_KEY);
                                 String yearDirty = movieJson.optString(OmdbApiConstants.MOVIE_YEAR_KEY);
                                 String posterUrl = movieJson.optString(OmdbApiConstants.MOVIE_POSTER_URL_KEY);
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                                 //Create new object and update UI.
                                 String nonDigit = "\\D+";
                                 String year = yearDirty.replaceAll(nonDigit, "");
-                                Movie movie = new Movie(title, Integer.parseInt(year), posterUrl);
+                                Movie movie = new Movie(id, title, Integer.parseInt(year), posterUrl);
                                 movies.add(movie);
                             } catch (JSONException e) {
                                 Toast.makeText(MainActivity.this, "Couldn't Understand what the server was saying, please call the RESTful API again.", Toast.LENGTH_SHORT).show();
@@ -161,5 +162,4 @@ public class MainActivity extends AppCompatActivity {
         request.setTag(OmdbApiConstants.MOVIE_REQUEST_TAG);
         VolleyManager.getInstance(this).addRequest(this, request);
     }
-
 }

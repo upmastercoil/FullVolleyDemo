@@ -59,19 +59,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
         // In anonymous class variables must be final. to not change the method's signature we create a final copy of the position and call it
         final int pos = position;
-        Movie movie = movies.get(position);
+        final Movie movie = movies.get(position);
         holder.titleTextView.setText(movie.getTitle());
         holder.yearTextView.setText(String.valueOf(movie.getYear()));
         holder.posterImageView.setImageUrl(movie.getPosterUrl(), VolleyManager.getInstance(context).getImageLoader());
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-//              Since we didn't initialize the listener at construction, a null check is required.
-//                if (movieClickListener != null)
-//                    movieClickListener.onBookClicked(pos);
-//            }
-//        });
+              //Since we didn't initialize the listener at construction, a null check is required.
+                if (movieClickListener != null)
+                    movieClickListener.onMovieClicked(movie);
+            }
+        });
     }
 
     /**
@@ -120,6 +120,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     public void addAll(List<Movie> movies) {
 
         this.movies.addAll(movies);
+        notifyDataSetChanged();
+    }
+
+    public void add(Movie movie){
+        movies.clear();
+        insertMovie(movie);
         notifyDataSetChanged();
     }
 }
